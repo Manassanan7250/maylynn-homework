@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maylynn Homework</title>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f0ebff;
+    --card: #ffffffcc;
+    --card-solid: #ffffff;
+    --accent: #b49de0;
+    --accent2: #9b7fd4;
+    --accent3: #7c5cbf;
+    --soft: #d8cef5;
+    --soft2: #ede8ff;
+    --text: #5a4880;
+    --text-light: #9585bb;
+    --text-muted: #b8aad8;
+    --green: #a8d8a8;
+    --green-text: #4a8a4a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Mitr', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text);
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 10%, #ddd0ff88 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, #f0d0ff66 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+  .blob {
+    position: fixed; border-radius: 50%;
+    background: #c9b8f0; opacity: 0.12;
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none; z-index: 0;
+  }
+  .blob:nth-child(1) { width: 180px; height: 180px; bottom: 8%; left: 5%; }
+  .blob:nth-child(2) { width: 120px; height: 120px; bottom: 20%; right: 8%; animation-delay: 3s; }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 420px; margin: 0 auto;
+    padding: 20px 16px 100px;
+  }
+  .header-card {
+    background: var(--card);
+    backdrop-filter: blur(12px);
+    border-radius: 22px; padding: 18px 20px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px #b49de033;
+    border: 1.5px solid #e0d4ff; margin-bottom: 14px;
+  }
+  .brand-name {
+    font-family: 'Lilita One', cursive;
+    font-size: 22px; color: var(--accent3);
+  }
+  .badge {
+    background: var(--soft); color: var(--accent3);
+    font-size: 10px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 1px; border: 1px solid #d0c0ff;
+  }
+  .sub-label {
+    font-size: 11px; letter-spacing: 3px;
+    color: var(--text-muted); font-weight: 300; margin-top: 4px;
+  }
+  .avatar {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: linear-gradient(135deg, #d4bcff, #b89ded);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; border: 3px solid #fff;
+    box-shadow: 0 4px 14px #b49de044;
+  }
+  .banner {
+    background: linear-gradient(135deg, #c8b0f5 0%, #a888e0 40%, #c0a8f0 100%);
+    border-radius: 22px; padding: 22px 24px;
+    margin-bottom: 14px; position: relative; overflow: hidden;
+    box-shadow: 0 8px 32px #b49de033; border: 1.5px solid #b89ded55;
+  }
+  .banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 20%, #ffffff25 0%, transparent 50%);
+  }
+  .banner-title {
+    font-family: 'Lilita One', cursive; font-size: 32px;
+    color: #fff; text-shadow: 2px 3px 0px #8b5cbf44;
+    line-height: 1; position: relative; z-index: 1;
+  }
+  .banner-sub {
+    color: #ffffffcc; font-size: 12px; margin-top: 8px;
+    position: relative; z-index: 1;
+  }
+  .banner-emoji {
+    position: absolute; bottom: 12px; right: 20px;
+    font-size: 36px; animation: float 4s ease-in-out infinite;
+  }
+  .stats-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px; margin-bottom: 14px;
+  }
+  .stat-card {
+    background: var(--card); backdrop-filter: blur(12px);
+    border-radius: 18px; padding: 16px 12px; text-align: center;
+    box-shadow: 0 4px 24px #c9b8f022; border: 1.5px solid #e0d4ff;
+  }
+  .stat-tag {
+    display: inline-block; background: var(--soft); color: var(--accent3);
+    font-size: 9px; padding: 3px 8px; border-radius: 10px;
+    letter-spacing: 1px; font-weight: 600; margin-bottom: 8px;
+    border: 1px solid #d0c0ff;
+  }
+  .stat-number {
+    font-family: 'Lilita One', cursive; font-size: 30px;
+    color: var(--accent3); line-height: 1;
+  }
+  .stat-date { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+  .stat-label {
+    font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted);
+    text-transform: uppercase; margin-bottom: 6px; display: block;
+  }
+  .queue-circle {
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 2.5px solid var(--soft);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 4px; background: var(--soft2);
+  }
+  .queue-num { font-family: 'Lilita One', cursive; font-size: 22px; color: var(--accent3); }
+  .queue-unit { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .success-label {
+    font-size: 9px; color: var(--text-muted); display: block;
+    margin-bottom: 6px; text-align: center;
+  }
+  .progress-wrap { position: relative; width: 52px; height: 52px; margin: 0 auto 4px; }
+  .progress-svg { transform: rotate(-90deg); width: 52px; height: 52px; }
+  .progress-bg { fill: none; stroke: var(--soft); stroke-width: 4; }
+  .progress-fill {
+    fill: none; stroke: var(--accent2); stroke-width: 4;
+    stroke-linecap: round; stroke-dasharray: 138.2; stroke-dashoffset: 0;
+  }
+  .progress-emoji {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%); font-size: 18px;
+  }
+  .progress-pct {
+    font-family: 'Lilita One', cursive; font-size: 13px;
+    color: var(--accent3); display: block; text-align: center;
+  }
+  .progress-sub { font-size: 9px; color: var(--text-muted); text-align: center; }
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; color: var(--text-muted);
+    margin: 18px 0 10px 4px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--soft), transparent);
+  }
+  .task-card {
+    background: var(--card); backdrop-filter: blur(12px);
+    border-radius: 18px; padding: 16px 18px; margin-bottom: 10px;
+    box-shadow: 0 4px 24px #c9b8f022; border: 1.5px solid #e0d4ff;
+    display: flex; align-items: center; gap: 14px;
+    position: relative; overflow: hidden;
+  }
+  .task-card::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 4px;
+    border-radius: 4px 0 0 4px;
+    background: linear-gradient(180deg, var(--accent2), var(--accent));
+  }
+  .task-card.done::before {
+    background: linear-gradient(180deg, var(--green), #8acc8a);
+  }
+  .task-icon { font-size: 28px; flex-shrink: 0; }
+  .task-body { flex: 1; }
+  .task-platform {
+    font-size: 10px; letter-spacing: 2px; color: var(--accent2);
+    font-weight: 600; display: block; margin-bottom: 2px;
+  }
+  .task-name { font-size: 14px; color: var(--text); font-weight: 500; display: block; }
+  .task-type { font-size: 11px; color: var(--text-muted); margin-top: 2px; display: block; }
+  .task-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .task-date {
+    background: var(--soft); color: var(--text-light); font-size: 10px;
+    padding: 4px 10px; border-radius: 10px; border: 1px solid #d8c8ff;
+    display: flex; align-items: center; gap: 4px; white-space: nowrap;
+  }
+  .task-done-btn {
+    background: linear-gradient(135deg, #b8f0b8, #90d890);
+    color: var(--green-text); font-size: 10px; font-weight: 600;
+    padding: 4px 12px; border-radius: 10px; border: 1px solid #a0dca0;
+    font-family: 'Mitr', sans-serif;
+  }
+  .task-pending-btn {
+    background: var(--soft2); color: var(--accent2); font-size: 10px;
+    padding: 4px 12px; border-radius: 10px; border: 1px solid #d0c0ff;
+    font-family: 'Mitr', sans-serif;
+  }
+  .bottom-nav {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--card-solid); border-radius: 30px;
+    padding: 12px 36px; display: flex; gap: 32px;
+    box-shadow: 0 8px 32px #b49de055; border: 1.5px solid #e0d4ff; z-index: 100;
+  }
+  .nav-btn {
+    background: none; border: none; font-size: 22px;
+    cursor: pointer; padding: 4px; border-radius: 12px;
+  }
+  .nav-btn.active { background: var(--soft); }
+</style>
+</head>
+<body>
+<div class="blob"></div>
+<div class="blob"></div>
+
+<div class="wrapper">
+  <div class="header-card">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="brand-name">MAYLYNN</span>
+        <span class="badge">GUEST</span>
+      </div>
+      <div class="sub-label">— H O M E W O R K —</div>
+    </div>
+    <div class="avatar">🌸</div>
+  </div>
+
+  <div class="banner">
+    <div class="banner-title">Maylynn<br>Homework</div>
+    <div class="banner-sub">จุดเช็คคิวลูกค้า หากตกหล่นแจ้งได้เลยนะ 🌷</div>
+    <div class="banner-emoji">🎀</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-tag">NEXT QUEUE</span>
+      <div class="stat-number">14</div>
+      <div class="stat-date">MAY 2026</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">คิวก่อนหน้า</span>
+      <div class="queue-circle">
+        <span class="queue-num">2</span>
+      </div>
+      <div class="queue-unit">คิว</div>
+    </div>
+    <div class="stat-card">
+      <span class="success-label">ความสำเร็จวันนี้</span>
+      <div class="progress-wrap">
+        <svg class="progress-svg" viewBox="0 0 52 52">
+          <circle class="progress-bg" cx="26" cy="26" r="22"/>
+          <circle class="progress-fill" cx="26" cy="26" r="22"/>
+        </svg>
+        <div class="progress-emoji">✨</div>
+      </div>
+      <span class="progress-pct">100%</span>
+      <span class="progress-sub">1 / 1 งาน</span>
+    </div>
+  </div>
+
+  <div class="section-label">TODAY'S TASK</div>
+
+  <div class="task-card done">
+    <div class="task-icon">🐰</div>
+    <div class="task-body">
+      <span class="task-platform">LINE</span>
+      <span class="task-name">แพม</span>
+      <span class="task-type">รายละเอียดงาน • เฮดเฮด</span>
+    </div>
+    <div class="task-actions">
+      <span class="task-date">📅 13/05/69</span>
+      <button class="task-done-btn">✓ เสร็จแล้ว</button>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <div class="task-icon">🌷</div>
+    <div class="task-body">
+      <span class="task-platform">INSTAGRAM</span>
+      <span class="task-name">มิน</span>
+      <span class="task-type">รายละเอียดงาน • ชิ้นเดียว</span>
+    </div>
+    <div class="task-actions">
+      <span class="task-date">📅 14/05/69</span>
+      <button class="task-pending-btn">⏳ กำลังทำ</button>
+    </div>
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active">🏠</button>
+  <button class="nav-btn">📋</button>
+</nav>
+</body>
+</html>
