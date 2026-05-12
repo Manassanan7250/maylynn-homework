@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin – Maylynn Homework</title>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Lilita+One&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f0ebff;
+    --card: #ffffffdd;
+    --accent2: #9b7fd4;
+    --accent3: #7c5cbf;
+    --soft: #d8cef5;
+    --soft2: #ede8ff;
+    --text: #5a4880;
+    --text-muted: #b8aad8;
+    --text-light: #9585bb;
+    --green: #b8f0b8;
+    --green-text: #4a8a4a;
+    --red: #f0b8b8;
+    --red-text: #b84444;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Mitr', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text);
+  }
+
+  /* LOGIN */
+  #login-screen {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg); z-index: 999;
+  }
+  .login-card {
+    background: white; border-radius: 24px;
+    padding: 36px 32px; width: 300px;
+    box-shadow: 0 8px 32px #b49de033;
+    border: 1.5px solid #e0d4ff; text-align: center;
+  }
+  .login-card h2 {
+    font-family: 'Lilita One', cursive;
+    color: var(--accent3); font-size: 22px; margin-bottom: 20px;
+  }
+  .login-input {
+    width: 100%; background: var(--soft2);
+    border: 1.5px solid #d8c8ff; border-radius: 14px;
+    padding: 12px; font-family: 'Mitr', sans-serif;
+    font-size: 14px; color: var(--text);
+    text-align: center; letter-spacing: 4px;
+    outline: none; margin-bottom: 12px;
+  }
+  .login-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent2), var(--accent3));
+    color: white; border: none; border-radius: 14px;
+    padding: 12px; font-family: 'Mitr', sans-serif;
+    font-size: 15px; cursor: pointer;
+  }
+  .error-msg {
+    color: var(--red-text); font-size: 12px;
+    margin-top: 8px; display: none;
+  }
+
+  /* MAIN */
+  #main-screen { display: none; }
+  .wrapper { max-width: 480px; margin: 0 auto; padding: 20px 16px 80px; }
+
+  .header {
+    background: white; border-radius: 20px;
+    padding: 16px 20px; margin-bottom: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    border: 1.5px solid #e0d4ff;
+    box-shadow: 0 4px 20px #c9b8f022;
+  }
+  .header h1 {
+    font-family: 'Lilita One', cursive;
+    color: var(--accent3); font-size: 18px;
+  }
+  .logout-btn {
+    background: var(--soft); color: var(--text-light);
+    border: 1px solid #d0c0ff; border-radius: 10px;
+    padding: 6px 14px; font-family: 'Mitr', sans-serif;
+    font-size: 12px; cursor: pointer;
+  }
+
+  .add-card {
+    background: white; border-radius: 20px;
+    padding: 20px; margin-bottom: 14px;
+    border: 1.5px solid #e0d4ff;
+    box-shadow: 0 4px 20px #c9b8f022;
+  }
+  .section-title {
+    font-size: 11px; letter-spacing: 3px;
+    color: var(--text-muted); margin-bottom: 14px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: span 2; }
+  .form-label { font-size: 11px; color: var(--text-muted); }
+  .form-input, .form-select {
+    background: var(--soft2); border: 1.5px solid #d8c8ff;
+    border-radius: 12px; padding: 10px 14px;
+    font-family: 'Mitr', sans-serif; font-size: 13px;
+    color: var(--text); outline: none; width: 100%;
+  }
+  .add-btn {
+    width: 100%; margin-top: 12px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent3));
+    color: white; border: none; border-radius: 14px;
+    padding: 12px; font-family: 'Mitr', sans-serif;
+    font-size: 15px; cursor: pointer;
+  }
+
+  .queue-card {
+    background: white; border-radius: 18px;
+    padding: 16px 18px; margin-bottom: 10px;
+    border: 1.5px solid #e0d4ff;
+    box-shadow: 0 4px 20px #c9b8f022;
+    display: flex; align-items: center; gap: 12px;
+    position: relative; overflow: hidden;
+  }
+  .queue-card::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(180deg, var(--accent2), var(--soft));
+  }
+  .queue-icon { font-size: 26px; }
+  .queue-body { flex: 1; }
+  .queue-platform {
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--accent2); font-weight: 600; display: block;
+  }
+  .queue-name { font-size: 14px; color: var(--text); }
+  .queue-meta { font-size: 11px; color: var(--text-muted); }
+  .queue-actions {
+    display: flex; flex-direction: column;
+    gap: 6px; align-items: flex-end;
+  }
+  .btn-status {
+    font-size: 10px; padding: 5px 12px;
+    border-radius: 10px; cursor: pointer;
+    font-family: 'Mitr', sans-serif; border: none;
+  }
+  .btn-pending { background: var(--soft2); color: var(--accent2); border: 1px solid #d0c0ff; }
+  .btn-inprog { background: #fff3cd; color: #8a6800; border: 1px solid #f0dc8a; }
+  .btn-done { background: var(--green); color: var(--green-text); border: 1px solid #a0dca0; }
+  .btn-delete {
+    background: var(--red); color: var(--red-text);
+    border: 1px solid #f0c0c0; font-size: 10px;
+    padding: 5px 12px; border-radius: 10px;
+    cursor: pointer; font-family: 'Mitr', sans-serif;
+  }
+  .empty {
+    text-align: center; padding: 40px;
+    color: var(--text-muted); font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- หน้า Login -->
+<div id="login-screen">
+  <div class="login-card">
+    <h2>🔐 Admin Login</h2>
+    <input class="login-input" type="password"
+      id="pw-input" placeholder="รหัสผ่าน" />
+    <button class="login-btn" onclick="doLogin()">เข้าสู่ระบบ 🌸</button>
+    <div class="error-msg" id="pw-error">รหัสผ่านไม่ถูกต้องค่ะ</div>
+  </div>
+</div>
+
+<!-- หน้าหลัก -->
+<div id="main-screen">
+  <div class="wrapper">
+
+    <div class="header">
+      <h1>🎀 MAYLYNN ADMIN</h1>
+      <button class="logout-btn" onclick="doLogout()">ออกจากระบบ</button>
+    </div>
+
+    <div class="add-card">
+      <div class="section-title">✦ เพิ่มคิวใหม่</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">ชื่อลูกค้า</label>
+          <input class="form-input" id="f-name" placeholder="เช่น แพม" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Platform</label>
+          <select class="form-select" id="f-platform">
+            <option>LINE</option>
+            <option>INSTAGRAM</option>
+            <option>TWITTER</option>
+            <option>FACEBOOK</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">ประเภทงาน</label>
+          <input class="form-input" id="f-type" placeholder="เช่น Head shot" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">วันกำหนดส่ง</label>
+          <input class="form-input" id="f-date" type="date" />
+        </div>
+        <div class="form-group full">
+          <label class="form-label">ไอคอน (emoji)</label>
+          <input class="form-input" id="f-icon" placeholder="🐰 🌷 🦋 (ไม่ใส่ก็ได้)" />
+        </div>
+      </div>
+      <button class="add-btn" onclick="addQueue()">✦ เพิ่มคิว</button>
+    </div>
+
+    <div class="section-title" style="margin-bottom:10px">รายการคิวทั้งหมด</div>
+    <div id="queue-list"></div>
+
+  </div>
+</div>
+
+<script>
+  const PASSWORD = "maylynn2026"
+
+  // Login / Logout
+  function doLogin() {
+    const val = document.getElementById("pw-input").value
+    if (val === PASSWORD) {
+      document.getElementById("login-screen").style.display = "none"
+      document.getElementById("main-screen").style.display = "block"
+      renderList()
+    } else {
+      document.getElementById("pw-error").style.display = "block"
+    }
+  }
+
+  document.getElementById("pw-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") doLogin()
+  })
+
+  function doLogout() {
+    document.getElementById("login-screen").style.display = "flex"
+    document.getElementById("main-screen").style.display = "none"
+    document.getElementById("pw-input").value = ""
+  }
+
+  // เก็บข้อมูลใน localStorage
+  function getQueues() {
+    return JSON.parse(localStorage.getItem("maylynn_queues") || "[]")
+  }
+  function saveQueues(q) {
+    localStorage.setItem("maylynn_queues", JSON.stringify(q))
+  }
+
+  // เพิ่มคิว
+  function addQueue() {
+    const name = document.getElementById("f-name").value.trim()
+    if (!name) { alert("กรุณาใส่ชื่อลูกค้าค่ะ 🌸"); return }
+
+    const icons = ["🐰","🌷","🦋","🌸","🎀","✨"]
+    const icon = document.getElementById("f-icon").value.trim()
+      || icons[Math.floor(Math.random() * icons.length)]
+
+    const date = document.getElementById("f-date").value
+    let dateText = "—"
+    if (date) {
+      const d = new Date(date)
+      const dd = String(d.getDate()).padStart(2,"0")
+      const mm = String(d.getMonth()+1).padStart(2,"0")
+      const yy = (d.getFullYear()+543).toString().slice(-2)
+      dateText = dd+"/"+mm+"/"+yy
+    }
+
+    const queues = getQueues()
+    queues.push({
+      id: Date.now(),
+      name: name,
+      platform: document.getElementById("f-platform").value,
+      type: document.getElementById("f-type").value.trim(),
+      date: dateText,
+      icon: icon,
+      status: "pending"
+    })
+    saveQueues(queues)
+    renderList()
+
+    // เคลียร์ฟอร์ม
+    document.getElementById("f-name").value = ""
+    document.getElementById("f-type").value = ""
+    document.getElementById("f-date").value = ""
+    document.getElementById("f-icon").value = ""
+  }
+
+  // เปลี่ยนสถานะ
+  function cycleStatus(id) {
+    const queues = getQueues()
+    const q = queues.find(x => x.id === id)
+    const next = { pending: "inprogress", inprogress: "done", done: "pending" }
+    q.status = next[q.status]
+    saveQueues(queues)
+    renderList()
+  }
+
+  // ลบคิว
+  function deleteQueue(id) {
+    const queues = getQueues().filter(x => x.id !== id)
+    saveQueues(queues)
+    renderList()
+  }
+
+  // แสดงรายการ
+  function renderList() {
+    const queues = getQueues()
+    const el = document.getElementById("queue-list")
+
+    if (queues.length === 0) {
+      el.innerHTML = '<div class="empty">🌸 ยังไม่มีคิวค่ะ</div>'
+      return
+    }
+
+    el.innerHTML = queues.map(q => {
+      let btnClass, btnText
+      if (q.status === "pending") {
+        btnClass = "btn-pending"; btnText = "📌 รอคิว"
+      } else if (q.status === "inprogress") {
+        btnClass = "btn-inprog"; btnText = "✏️ กำลังทำ"
+      } else {
+        btnClass = "btn-done"; btnText = "✓ เสร็จแล้ว"
+      }
+
+      return `
+      <div class="queue-card">
+        <div class="queue-icon">${q.icon}</div>
+        <div class="queue-body">
+          <span class="queue-platform">${q.platform}</span>
+          <div class="queue-name">${q.name}</div>
+          <div class="queue-meta">${q.type || "—"} • 📅 ${q.date}</div>
+        </div>
+        <div class="queue-actions">
+          <button class="btn-status ${btnClass}"
+            onclick="cycleStatus(${q.id})">${btnText}</button>
+          <button class="btn-delete"
+            onclick="deleteQueue(${q.id})">🗑 ลบ</button>
+        </div>
+      </div>`
+    }).join("")
+  }
+</script>
+</body>
+</html>
